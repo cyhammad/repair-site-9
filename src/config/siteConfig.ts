@@ -15,7 +15,7 @@ export const companies = [
     logo: "/bosch.svg",
     description: "Authorized Bosch service center in UAE",
     color: "#c41e3a",
-    heroImage: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&h=600&fit=crop&auto=format"
+    heroImage: "/bosch.svg"
   },
   {
     id: "siemens", 
@@ -23,7 +23,7 @@ export const companies = [
     logo: "/siemens.svg",
     description: "Certified Siemens repair specialists",
     color: "#009999",
-    heroImage: "https://images.unsplash.com/photo-1556909275-ebb90f430cc4?w=800&h=600&fit=crop&auto=format"
+    heroImage: "/siemens.svg"
   },
   {
     id: "lg",
@@ -31,7 +31,7 @@ export const companies = [
     logo: "/lg.svg", 
     description: "Official LG service and repair center",
     color: "#a50034",
-    heroImage: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&h=600&fit=crop&auto=format"
+    heroImage: "/lg.svg"
   },
   {
     id: "samsung",
@@ -39,7 +39,7 @@ export const companies = [
     logo: "/samsung.svg",
     description: "Samsung authorized repair service",
     color: "#1428a0",
-    heroImage: "https://images.unsplash.com/photo-1556909275-ebb90f430cc4?w=800&h=600&fit=crop&auto=format"
+    heroImage: "/samsung.svg"
   }
 ]
 
@@ -48,7 +48,7 @@ export const services = [
     id: "washing-machine",
     name: "Washing Machine Repair",
     description: "Expert washing machine repair services for all brands",
-    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop&auto=format",
+    image: "/services/washing.webp",
     availableFor: ["bosch", "siemens", "lg", "samsung"],
     commonIssues: ["Not spinning", "Water leakage", "Not draining", "Unusual noise"],
     icon: "🧺"
@@ -57,7 +57,7 @@ export const services = [
     id: "dryer",
     name: "Dryer Repair", 
     description: "Professional dryer repair and maintenance services",
-    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop&auto=format",
+    image: "/services/dryer.jpg",
     availableFor: ["bosch", "siemens", "lg", "samsung"],
     commonIssues: ["Not heating", "Takes too long", "Not turning on", "Overheating"],
     icon: "🌪️"
@@ -66,7 +66,7 @@ export const services = [
     id: "dishwasher",
     name: "Dishwasher Repair",
     description: "Complete dishwasher repair and installation services", 
-    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop&auto=format",
+    image: "/services/dishwasher.jpg",
     availableFor: ["bosch", "siemens", "lg", "samsung"],
     commonIssues: ["Not cleaning properly", "Water not draining", "Strange odors", "Not starting"],
     icon: "🍽️"
@@ -75,7 +75,7 @@ export const services = [
     id: "tv",
     name: "TV Repair",
     description: "Smart TV and LED TV repair services",
-    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop&auto=format", 
+    image: "/services/tv.jpg", 
     availableFor: ["lg", "samsung"],
     commonIssues: ["Black screen", "No sound", "Remote not working", "Connectivity issues"],
     icon: "📺"
@@ -84,7 +84,7 @@ export const services = [
     id: "cooktop",
     name: "Cooktop/Stove Repair",
     description: "Gas and electric cooktop repair services",
-    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop&auto=format",
+    image: "/services/cooktop.webp",
     availableFor: ["bosch", "siemens"], 
     commonIssues: ["Burners not working", "Uneven heating", "Gas smell", "Temperature issues"],
     icon: "🔥"
@@ -93,7 +93,7 @@ export const services = [
     id: "oven",
     name: "Oven Repair",
     description: "Built-in and standalone oven repair services",
-    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop&auto=format",
+    image: "/services/oven.jpg",
     availableFor: ["bosch", "siemens", "lg", "samsung"],
     commonIssues: ["Not heating", "Door problems", "Timer issues", "Temperature inconsistency"],
     icon: "🔥"
@@ -102,20 +102,11 @@ export const services = [
     id: "fridge",
     name: "Refrigerator Repair", 
     description: "Refrigerator and freezer repair services",
-    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop&auto=format",
+    image: "/services/fridge.png",
     availableFor: ["bosch", "siemens", "lg", "samsung"],
     commonIssues: ["Not cooling", "Ice maker problems", "Water leakage", "Strange noises"],
     icon: "❄️"
   },
-  {
-    id: "microwave",
-    name: "Microwave Repair",
-    description: "Microwave oven repair and maintenance",
-    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop&auto=format",
-    availableFor: ["bosch", "siemens", "lg", "samsung"],
-    commonIssues: ["Not heating", "Turntable issues", "Door problems", "Strange sounds"],
-    icon: "📻"
-  }
 ]
 
 export const testimonials = [
