@@ -79,7 +79,7 @@ export function Header() {
               />
             ) : (
               <span className="text-2xl font-bold text-secondary">
-                Appliance Repair Center
+                Appliance Service Center AE
               </span>
             )}
           </div>

@@ -29,7 +29,7 @@ export function HomePage({ currentCompany }: HomePageProps) {
             <div>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
                 {currentCompanyData ? `${currentCompanyData.name} ` : ''}
-                Appliance Repair Center in {siteConfig.locations}
+                Appliance Service Center AE in {siteConfig.locations}
               </h1>
               <p className="text-xl mb-8 opacity-90">
                 {currentCompanyData 

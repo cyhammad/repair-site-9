@@ -42,7 +42,7 @@ export function Footer() {
                 />
               ) : (
                 <h3 className="text-xl font-bold text-primary">
-                  Appliance Repair Center
+                  Appliance Service Center AE
                 </h3>
               )}
             </div>
@@ -79,8 +79,8 @@ export function Footer() {
           className="border-t border-secondary-foreground/20 mt-8 pt-8 text-center text-secondary-foreground/80"
         >
           <p>
-            &copy; 2025 {currentCompanyData?.name || "Appliance Repair Center"}.
-            All rights reserved. | Professional Appliance Repair Center in UAE
+            &copy; 2025 {currentCompanyData?.name || "Appliance Service Center AE"}.
+            All rights reserved. | Professional Appliance Service Center AE in UAE
           </p>
         </motion.div>
       </div>
