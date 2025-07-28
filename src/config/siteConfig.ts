@@ -1,6 +1,6 @@
 export const siteConfig = {
   companyName: "Appliance Repair Center",
-  phoneNumber: "+971 50 123 4567",
+  phoneNumber: "+971545900148",
   locations: "Dubai and Abu Dhabi",
   email: "info@appliancerepair.ae",
   address: "Business Bay, Dubai, UAE",
