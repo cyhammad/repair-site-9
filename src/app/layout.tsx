@@ -4,6 +4,7 @@ import "./globals.css";
 import { Header } from "@/components/Header";
 import { FloatingContactButtons } from "@/components/FloatingContactButtons";
 import { Footer } from "@/components/Footer";
+import Script from "next/script";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,6 +28,19 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+    <head>
+        {/* Include gtag.js script */}
+        <Script async src="https://www.googletagmanager.com/gtag/js?id=AW-17395932761" />
+
+        {/* Include gtag.js initialization script */}
+        <Script dangerouslySetInnerHTML={{ __html: `
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'AW-17395932761');
+        ` }} />
+
+</head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
