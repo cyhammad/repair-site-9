@@ -8,7 +8,8 @@ import { useParams } from "next/navigation";
 
 export function Header() {
   const params = useParams();
-  const currentCompany = params.company;
+  // const currentCompany = params.company;
+  const currentCompany = "";
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 

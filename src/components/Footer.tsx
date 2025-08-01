@@ -8,7 +8,8 @@ import { useParams } from "next/navigation";
 
 export function Footer() {
   const params = useParams();
-  const currentCompany = params.company;
+  // const currentCompany = params.company;
+  const currentCompany = "";
   const currentCompanyData = currentCompany
     ? companies.find((c) => c.id === currentCompany)
     : null;
