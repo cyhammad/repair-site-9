@@ -1,31 +1,31 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { motion } from "framer-motion";
-import {
-  ChevronLeft,
-  ChevronRight,
-  Phone,
-  CheckCircle,
-  MessageCircle,
-} from "lucide-react";
+import { ChevronLeft, ChevronRight, Phone, CheckCircle, MessageCircle } from "lucide-react";
 import { Button } from "./ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "./ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card";
 import { ImageWithFallback } from "@/components/ImageWithFallback";
 import { siteConfig, services, companies } from "@/config/siteConfig";
 import { makePhoneCall, openWhatsApp } from "../utils/contactActions";
-import { useEffect } from "react";
 import Image from "next/image";
 
 interface ServicesSectionProps {
   currentCompany?: string;
 }
+
+type Theme = {
+  accent: string;        // main brand color
+  accentSoft: string;    // subtle bg/border tint
+  border: string;        // border color
+};
+
+const THEMES: Record<string, Theme> = {
+  lg:      { accent: "#A50034", accentSoft: "rgba(165,0,52,0.10)", border: "rgba(165,0,52,0.25)" },
+  bosch:   { accent: "#F80000", accentSoft: "rgba(248,0,0,0.10)",  border: "rgba(248,0,0,0.25)" },
+  siemens: { accent: "#019997", accentSoft: "rgba(1,153,151,0.10)", border: "rgba(1,153,151,0.25)" },
+  samsung: { accent: "#000000", accentSoft: "rgba(0,0,0,0.06)",     border: "rgba(0,0,0,0.20)" },
+};
 
 export function ServicesSection({ currentCompany }: ServicesSectionProps) {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -34,22 +34,20 @@ export function ServicesSection({ currentCompany }: ServicesSectionProps) {
     ? companies.find((c) => c.id === currentCompany)
     : null;
 
+  const theme: Theme = useMemo(() => {
+    if (currentCompany && THEMES[currentCompany]) return THEMES[currentCompany];
+    return { accent: "var(--primary)", accentSoft: "rgba(59,130,246,0.08)", border: "rgba(59,130,246,0.25)" };
+  }, [currentCompany]);
+
   const availableServices = currentCompany
-    ? services.filter((service) =>
-        service.availableFor.includes(currentCompany)
-      )
+    ? services.filter((service) => service.availableFor.includes(currentCompany))
     : services;
 
   const itemsPerSlide = 3;
   const totalSlides = Math.ceil(availableServices.length / itemsPerSlide);
 
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % totalSlides);
-  };
-
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + totalSlides) % totalSlides);
-  };
+  const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % totalSlides);
+  const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + totalSlides) % totalSlides);
 
   const currentServices = availableServices.slice(
     currentSlide * itemsPerSlide,
@@ -61,11 +59,9 @@ export function ServicesSection({ currentCompany }: ServicesSectionProps) {
   };
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % totalSlides);
-    }, 3000); // 3 seconds
-
-    return () => clearInterval(interval); // cleanup on unmount
+    if (totalSlides <= 1) return;
+    const interval = setInterval(() => setCurrentSlide((prev) => (prev + 1) % totalSlides), 3000);
+    return () => clearInterval(interval);
   }, [totalSlides]);
 
   return (
@@ -88,60 +84,77 @@ export function ServicesSection({ currentCompany }: ServicesSectionProps) {
               : `Expert repair services for all major home appliances in ${siteConfig.locations}. Professional technicians, genuine parts, and warranty included.`}
           </p>
 
-          {/* Quick Contact Buttons */}
-          <div className="flex justify-center gap-4">
-            <Button
-              onClick={makePhoneCall}
-              className="bg-primary text-primary-foreground hover:bg-primary/90 border-0"
+          {/* Quick Contact Buttons (brand-aligned like hero, adapted for light bg) */}
+          <div className="flex justify-center gap-3">
+            {/* Call: solid brand, white text */}
+            <button
+              onClick={() => makePhoneCall()}
+              className="px-6 py-3 rounded-md font-semibold text-white transition-shadow shadow-sm"
+              style={{ backgroundColor: theme.accent }}
             >
-              <Phone className="size-5" />
-              Call {siteConfig.phoneNumber}
-            </Button>
-            <Button
+              Call Us
+            </button>
+
+            {/* WhatsApp: transparent with brand border/text (hero uses white; here we adapt for visibility) */}
+            <button
               onClick={() => openWhatsApp()}
-              className="bg-green-500 hover:bg-green-600 text-white border-0"
+              className="px-6 py-3 rounded-md font-semibold transition-colors"
+              style={{
+                color: theme.accent,
+                border: `1px solid ${theme.border}`,
+                backgroundColor: "transparent",
+              }}
             >
-              <Image width={20} height={20} alt="icon" src="/whatsapp.svg" />
               WhatsApp Us
-            </Button>
+            </button>
           </div>
         </motion.div>
 
         {/* Services Slider */}
         <div className="relative hidden sm:block">
-          {/* Navigation Buttons */}
+          {/* Navigation */}
           <div className="flex justify-center gap-4 mb-8">
-            <Button
-              variant="outline"
-              size="sm"
+            <button
               onClick={prevSlide}
               disabled={totalSlides <= 1}
-              className="border-primary/20 hover:border-primary/40"
+              className="px-3 py-2 rounded-md transition-colors"
+              style={{
+                border: `1px solid ${theme.border}`,
+                backgroundColor: "transparent",
+                color: "#111827",
+                opacity: totalSlides <= 1 ? 0.5 : 1,
+              }}
             >
               <ChevronLeft className="w-4 h-4" />
-            </Button>
+            </button>
 
             <div className="flex items-center gap-2">
               {Array.from({ length: totalSlides }).map((_, index) => (
                 <button
                   key={index}
                   onClick={() => setCurrentSlide(index)}
-                  className={`w-2 h-2 rounded-full transition-all ${
-                    index === currentSlide ? "bg-primary w-8" : "bg-primary/30"
-                  }`}
+                  className="h-2 rounded-full transition-all"
+                  style={{
+                    width: index === currentSlide ? 32 : 8,
+                    backgroundColor: index === currentSlide ? theme.accent : theme.accentSoft,
+                  }}
                 />
               ))}
             </div>
 
-            <Button
-              variant="outline"
-              size="sm"
+            <button
               onClick={nextSlide}
               disabled={totalSlides <= 1}
-              className="border-primary/20 hover:border-primary/40"
+              className="px-3 py-2 rounded-md transition-colors"
+              style={{
+                border: `1px solid ${theme.border}`,
+                backgroundColor: "transparent",
+                color: "#111827",
+                opacity: totalSlides <= 1 ? 0.5 : 1,
+              }}
             >
               <ChevronRight className="w-4 h-4" />
-            </Button>
+            </button>
           </div>
 
           {/* Services Grid */}
@@ -160,71 +173,71 @@ export function ServicesSection({ currentCompany }: ServicesSectionProps) {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1, duration: 0.6 }}
               >
-                <Card className="hover:shadow-lg transition-all duration-300 hover:-translate-y-2 group border-primary/20 h-full">
+                <Card
+                  className="hover:shadow-lg transition-all duration-300 hover:-translate-y-2 h-full"
+                  style={{ borderColor: theme.border, borderWidth: 1 }}
+                >
                   <CardHeader className="p-0">
                     <motion.div
-                      whileHover={{ scale: 1.05 }}
-                      transition={{ duration: 0.3 }}
+                      whileHover={{ scale: 1.03 }}
+                      transition={{ duration: 0.25 }}
                       className="relative overflow-hidden rounded-t-lg"
                     >
                       <ImageWithFallback
                         src={service.image}
                         alt={service.name}
-                        className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300"
+                        className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
                         width={400}
                         height={300}
                       />
-                      <div className="absolute top-4 left-4 text-3xl bg-white/90 w-12 h-12 rounded-full flex items-center justify-center">
+                      <div
+                        className="absolute top-4 left-4 text-3xl w-12 h-12 rounded-full flex items-center justify-center bg-white"
+                        style={{ boxShadow: `0 4px 18px -6px ${theme.border}`, color: theme.accent }}
+                      >
                         {service.icon}
                       </div>
                     </motion.div>
                   </CardHeader>
+
                   <CardContent className="p-6 flex flex-col h-full">
-                    <CardTitle className="mb-3 text-xl">
-                      {service.name}
-                    </CardTitle>
-                    <CardDescription className="mb-4 flex-grow">
-                      {service.description}
-                    </CardDescription>
+                    <CardTitle className="mb-3 text-xl">{service.name}</CardTitle>
+                    <CardDescription className="mb-4 flex-grow">{service.description}</CardDescription>
 
                     <div className="mb-6">
-                      <h4 className="font-semibold mb-3 text-sm">
-                        Common Issues We Fix:
-                      </h4>
+                      <h4 className="font-semibold mb-3 text-sm">Common Issues We Fix:</h4>
                       <ul className="space-y-2">
-                        {service.commonIssues
-                          .slice(0, 3)
-                          .map((issue, issueIndex) => (
-                            <motion.li
-                              key={issueIndex}
-                              initial={{ opacity: 0, x: -10 }}
-                              animate={{ opacity: 1, x: 0 }}
-                              transition={{ delay: 0.3 + issueIndex * 0.1 }}
-                              className="flex items-center gap-2 text-sm"
-                            >
-                              <CheckCircle className="w-4 h-4 text-primary flex-shrink-0" />
-                              <span>{issue}</span>
-                            </motion.li>
-                          ))}
+                        {service.commonIssues.slice(0, 3).map((issue, issueIndex) => (
+                          <motion.li
+                            key={issueIndex}
+                            initial={{ opacity: 0, x: -10 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: 0.3 + issueIndex * 0.1 }}
+                            className="flex items-center gap-2 text-sm"
+                          >
+                            <CheckCircle className="w-4 h-4 flex-shrink-0" style={{ color: theme.accent }} />
+                            <span>{issue}</span>
+                          </motion.li>
+                        ))}
                       </ul>
                     </div>
 
                     <div className="space-y-2 mt-auto">
-                      <Button
-                        className="w-full bg-primary text-primary-foreground hover:bg-primary/90 border-0"
-                        onClick={makePhoneCall}
+                      {/* Call: solid brand */}
+                      <button
+                        className="w-full py-2.5 rounded-md font-semibold text-white"
+                        style={{ backgroundColor: theme.accent }}
+                        onClick={() => makePhoneCall()}
                       >
-                        <Phone className="w-4 h-4 mr-2" />
                         Call Now
-                      </Button>
-                      <Button
-                        variant="outline"
-                        className="w-full border-green-500 text-green-600 hover:bg-green-50"
+                      </button>
+                      {/* WhatsApp: transparent with brand border/text */}
+                      <button
+                        className="w-full py-2.5 rounded-md font-semibold"
+                        style={{ color: theme.accent, border: `1px solid ${theme.border}`, backgroundColor: "transparent" }}
                         onClick={() => handleServiceWhatsApp(service.name)}
                       >
-                        <MessageCircle className="w-4 h-4 mr-2" />
                         WhatsApp
-                      </Button>
+                      </button>
                     </div>
                   </CardContent>
                 </Card>
@@ -233,7 +246,7 @@ export function ServicesSection({ currentCompany }: ServicesSectionProps) {
           </motion.div>
         </div>
 
-        {/* All Services Grid for smaller screens */}
+        {/* All Services Grid (mobile) */}
         <div className="md:hidden">
           <div className="grid grid-cols-1 gap-6">
             {availableServices.map((service, index) => (
@@ -244,7 +257,7 @@ export function ServicesSection({ currentCompany }: ServicesSectionProps) {
                 transition={{ delay: index * 0.1, duration: 0.6 }}
                 viewport={{ once: true }}
               >
-                <Card className="hover:shadow-lg transition-shadow border-primary/20">
+                <Card className="hover:shadow-lg transition-shadow" style={{ borderColor: theme.border, borderWidth: 1 }}>
                   <div className="grid grid-cols-1 sm:grid-cols-2">
                     <CardHeader className="p-0">
                       <ImageWithFallback
@@ -257,22 +270,19 @@ export function ServicesSection({ currentCompany }: ServicesSectionProps) {
                     </CardHeader>
                     <CardContent className="p-6">
                       <CardTitle className="mb-2 flex items-center gap-2">
-                        <span className="text-2xl">{service.icon}</span>
+                        <span className="text-2xl" style={{ color: theme.accent }}>
+                          {service.icon}
+                        </span>
                         {service.name}
                       </CardTitle>
-                      <CardDescription className="mb-4">
-                        {service.description}
-                      </CardDescription>
+                      <CardDescription className="mb-4">{service.description}</CardDescription>
 
                       <div className="mb-6">
                         <h4 className="font-semibold mb-2">Common Issues:</h4>
                         <ul className="space-y-1">
                           {service.commonIssues.map((issue, issueIndex) => (
-                            <li
-                              key={issueIndex}
-                              className="flex items-center gap-2 text-sm"
-                            >
-                              <CheckCircle className="w-3 h-3 text-primary flex-shrink-0" />
+                            <li key={issueIndex} className="flex items-center gap-2 text-sm">
+                              <CheckCircle className="w-3 h-3 flex-shrink-0" style={{ color: theme.accent }} />
                               <span>{issue}</span>
                             </li>
                           ))}
@@ -280,21 +290,20 @@ export function ServicesSection({ currentCompany }: ServicesSectionProps) {
                       </div>
 
                       <div className="space-y-2">
-                        <Button
-                          className="w-full bg-primary text-primary-foreground hover:bg-primary/90 border-0"
-                          onClick={makePhoneCall}
+                        <button
+                          className="w-full py-2.5 rounded-md font-semibold text-white"
+                          style={{ backgroundColor: theme.accent }}
+                          onClick={() => makePhoneCall()}
                         >
-                          <Phone className="w-4 h-4 mr-2" />
                           Call Now
-                        </Button>
-                        <Button
-                          variant="outline"
-                          className="w-full border-green-500 text-green-600 hover:bg-green-50"
+                        </button>
+                        <button
+                          className="w-full py-2.5 rounded-md font-semibold"
+                          style={{ color: theme.accent, border: `1px solid ${theme.border}`, backgroundColor: "transparent" }}
                           onClick={() => handleServiceWhatsApp(service.name)}
                         >
-                          <MessageCircle className="w-4 h-4 mr-2" />
                           WhatsApp
-                        </Button>
+                        </button>
                       </div>
                     </CardContent>
                   </div>
@@ -304,39 +313,33 @@ export function ServicesSection({ currentCompany }: ServicesSectionProps) {
           </div>
         </div>
 
-        {/* Process Section with Contact Options */}
+        {/* Process Section */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="bg-muted/50 rounded-lg p-8 mt-16"
+          className="rounded-lg p-8 mt-16"
+          style={{ backgroundColor: theme.accentSoft, border: `1px solid ${theme.border}` }}
         >
-          <h3 className="text-3xl font-bold text-center mb-12">
-            Our Service Process
-          </h3>
+          <h3 className="text-3xl font-bold text-center mb-12">Our Service Process</h3>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
             {[
               {
                 step: "1",
                 title: "Book Appointment",
-                description: `Call us or book online to schedule your ${
-                  currentCompanyData?.name || "appliance"
-                } repair service at your convenience.`,
+                description: `Call us or book online to schedule your ${currentCompanyData?.name || "appliance"} repair service at your convenience.`,
               },
               {
                 step: "2",
                 title: "Expert Diagnosis",
-                description:
-                  "Our certified technician will diagnose the issue and provide a free, detailed quote for the repair.",
+                description: "Our certified technician will diagnose the issue and provide a free, detailed quote for the repair.",
               },
               {
                 step: "3",
                 title: "Professional Repair",
-                description: `We fix your appliance using genuine ${
-                  currentCompanyData?.name || "manufacturer"
-                } parts and provide a comprehensive warranty.`,
+                description: `We fix your appliance using genuine ${currentCompanyData?.name || "manufacturer"} parts and provide a comprehensive warranty.`,
               },
             ].map((process, index) => (
               <motion.div
@@ -348,12 +351,11 @@ export function ServicesSection({ currentCompany }: ServicesSectionProps) {
                 className="text-center"
               >
                 <motion.div
-                  whileHover={{ scale: 1.1 }}
-                  className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4"
+                  whileHover={{ scale: 1.06 }}
+                  className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4"
+                  style={{ backgroundColor: theme.accent }}
                 >
-                  <span className="text-2xl font-bold text-primary-foreground">
-                    {process.step}
-                  </span>
+                  <span className="text-2xl font-bold text-white">{process.step}</span>
                 </motion.div>
                 <h4 className="text-xl font-semibold mb-2">{process.title}</h4>
                 <p className="text-muted-foreground">{process.description}</p>
@@ -361,28 +363,25 @@ export function ServicesSection({ currentCompany }: ServicesSectionProps) {
             ))}
           </div>
 
-          {/* Contact CTA */}
+          {/* Contact CTA (same style language as hero) */}
           <div className="text-center">
-            <p className="text-lg mb-6">
-              Ready to get started? Contact us now for immediate assistance!
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button
-                onClick={makePhoneCall}
-                size="lg"
-                className="bg-primary text-primary-foreground hover:bg-primary/90 border-0"
+            <p className="text-lg mb-6">Ready to get started? Contact us now for immediate assistance!</p>
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <button
+                onClick={() => makePhoneCall()}
+                className="px-6 py-3 rounded-md font-semibold text-white"
+                style={{ backgroundColor: theme.accent }}
               >
-                <Phone className="w-5 h-5 mr-2" />
-                Call {siteConfig.phoneNumber}
-              </Button>
-              <Button
+                Call Us
+              </button>
+              <button
                 onClick={() => openWhatsApp()}
-                size="lg"
-                className="bg-green-500 hover:bg-green-600 text-white border-0"
+                className="px-6 py-3 rounded-md font-semibold"
+                style={{ color: "#ffffff", border: "1px solid #ffffff", backgroundColor: "transparent" }}
               >
-                <Image width={20} height={20} alt="icon" src="/whatsapp.svg" />
+                {/* NOTE: If you keep this on light bg, swap to brand border/text like above */}
                 WhatsApp Us
-              </Button>
+              </button>
             </div>
           </div>
         </motion.div>
