@@ -11,6 +11,7 @@ export default async function App({
 }) {
   const currentCompany = (await params).company;
 
+  
   return (
     <>
       <HeroSection currentCompany={currentCompany} />
