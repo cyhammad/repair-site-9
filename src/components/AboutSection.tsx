@@ -13,10 +13,10 @@ interface AboutSectionProps {
 type Theme = { accent: string; accentLight: string }
 
 const THEMES: Record<string, Theme> = {
-  lg: { accent: '#A50034', accentLight: 'rgba(165,0,52,0.1)' },
-  bosch: { accent: '#F80000', accentLight: 'rgba(248,0,0,0.1)' },
-  siemens: { accent: '#019997', accentLight: 'rgba(1,153,151,0.1)' },
-  samsung: { accent: '#000000', accentLight: 'rgba(0,0,0,0.1)' },
+  // lg: { accent: '#A50034', accentLight: 'rgba(165,0,52,0.1)' },
+  // bosch: { accent: '#F80000', accentLight: 'rgba(248,0,0,0.1)' },
+  // siemens: { accent: '#019997', accentLight: 'rgba(1,153,151,0.1)' },
+  // samsung: { accent: '#000000', accentLight: 'rgba(0,0,0,0.1)' },
 }
 
 export function AboutSection({ currentCompany }: AboutSectionProps) {
@@ -65,12 +65,14 @@ export function AboutSection({ currentCompany }: AboutSectionProps) {
             viewport={{ once: true }}
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              About {currentCompanyData?.name || 'Our Professional'} Service Center
+              {/* About {currentCompanyData?.name || 'Our Professional'} Service Center */}
+              About Our Professional Appliance Repair Center
             </h2>
             <p className="text-muted-foreground mb-6 text-lg">
-              {currentCompanyData
+              {/* {currentCompanyData
                 ? `As an authorized ${currentCompanyData.name} service center, we specialize in diagnosing and repairing all ${currentCompanyData.name} home appliances. Our certified technicians undergo regular training to stay updated with the latest ${currentCompanyData.name} technologies.`
-                : `Professional appliance repair services in ${siteConfig.locations} with over 15 years of experience. We are authorized service providers for all major brands including Bosch, Siemens, LG, and Samsung.`}
+                : `Professional appliance repair services in ${siteConfig.locations} with over 15 years of experience. We are authorized service providers for all major brands including Bosch, Siemens, LG, and Samsung.`} */}
+                Professional appliance repair services in {siteConfig.locations} with over 15 years of experience. We are authorized service providers for all major home appliances.
             </p>
             <p className="text-muted-foreground mb-8 text-lg">
               We understand that broken appliances can disrupt your daily routine, which is why we offer same-day service and emergency repairs throughout {siteConfig.locations}. Our team uses only genuine parts and provides comprehensive warranties.
@@ -79,7 +81,7 @@ export function AboutSection({ currentCompany }: AboutSectionProps) {
             <div className="space-y-4">
               {[
                 `Licensed and insured technicians`,
-                `Genuine ${currentCompanyData?.name || 'manufacturer'} parts only`,
+                // `Genuine ${currentCompanyData?.name || 'manufacturer'} parts only`,
                 `Comprehensive warranty on all repairs`,
                 `24/7 emergency service available`,
                 `Same-day service in ${siteConfig.locations}`,

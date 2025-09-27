@@ -15,10 +15,10 @@ type Theme = {
 };
 
 const THEMES: Record<string, Theme> = {
-  lg:      { accent: "#A50034", accentSoft: "rgba(165,0,52,0.10)", border: "rgba(165,0,52,0.25)" },
-  bosch:   { accent: "#F80000", accentSoft: "rgba(248,0,0,0.10)",  border: "rgba(248,0,0,0.25)" },
-  siemens: { accent: "#019997", accentSoft: "rgba(1,153,151,0.10)", border: "rgba(1,153,151,0.25)" },
-  samsung: { accent: "#000000", accentSoft: "rgba(0,0,0,0.06)",     border: "rgba(0,0,0,0.20)" },
+  // lg:      { accent: "#A50034", accentSoft: "rgba(165,0,52,0.10)", border: "rgba(165,0,52,0.25)" },
+  // bosch:   { accent: "#F80000", accentSoft: "rgba(248,0,0,0.10)",  border: "rgba(248,0,0,0.25)" },
+  // siemens: { accent: "#019997", accentSoft: "rgba(1,153,151,0.10)", border: "rgba(1,153,151,0.25)" },
+  // samsung: { accent: "#000000", accentSoft: "rgba(0,0,0,0.06)",     border: "rgba(0,0,0,0.20)" },
 };
 
 export function TestimonialsSection() {

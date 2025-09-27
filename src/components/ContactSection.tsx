@@ -20,34 +20,34 @@ type Theme = {
 };
 
 const THEMES: Record<string, Theme> = {
-  lg: {
-    accent: "#A50034",
-    accentSoft: "rgba(165,0,52,0.10)",
-    border: "rgba(165,0,52,0.25)",
-    overlay:
-      "linear-gradient(120deg, rgba(165,0,52,0.85) 0%, rgba(50,0,16,0.85) 45%, rgba(0,0,0,0.85) 100%)",
-  },
-  bosch: {
-    accent: "#F80000",
-    accentSoft: "rgba(248,0,0,0.10)",
-    border: "rgba(248,0,0,0.25)",
-    overlay:
-      "linear-gradient(120deg, rgba(248,0,0,0.88) 0%, rgba(112,0,0,0.86) 50%, rgba(0,0,0,0.84) 100%)",
-  },
-  siemens: {
-    accent: "#019997",
-    accentSoft: "rgba(1,153,151,0.10)",
-    border: "rgba(1,153,151,0.25)",
-    overlay:
-      "linear-gradient(120deg, rgba(1,153,151,0.88) 0%, rgba(0,72,71,0.86) 50%, rgba(0,0,0,0.84) 100%)",
-  },
-  samsung: {
-    accent: "#000000",
-    accentSoft: "rgba(0,0,0,0.06)",
-    border: "rgba(0,0,0,0.20)",
-    overlay:
-      "linear-gradient(120deg, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.88) 50%, rgba(0,0,0,0.84) 100%)",
-  },
+  // lg: {
+  //   accent: "#A50034",
+  //   accentSoft: "rgba(165,0,52,0.10)",
+  //   border: "rgba(165,0,52,0.25)",
+  //   overlay:
+  //     "linear-gradient(120deg, rgba(165,0,52,0.85) 0%, rgba(50,0,16,0.85) 45%, rgba(0,0,0,0.85) 100%)",
+  // },
+  // bosch: {
+  //   accent: "#F80000",
+  //   accentSoft: "rgba(248,0,0,0.10)",
+  //   border: "rgba(248,0,0,0.25)",
+  //   overlay:
+  //     "linear-gradient(120deg, rgba(248,0,0,0.88) 0%, rgba(112,0,0,0.86) 50%, rgba(0,0,0,0.84) 100%)",
+  // },
+  // siemens: {
+  //   accent: "#019997",
+  //   accentSoft: "rgba(1,153,151,0.10)",
+  //   border: "rgba(1,153,151,0.25)",
+  //   overlay:
+  //     "linear-gradient(120deg, rgba(1,153,151,0.88) 0%, rgba(0,72,71,0.86) 50%, rgba(0,0,0,0.84) 100%)",
+  // },
+  // samsung: {
+  //   accent: "#000000",
+  //   accentSoft: "rgba(0,0,0,0.06)",
+  //   border: "rgba(0,0,0,0.20)",
+  //   overlay:
+  //     "linear-gradient(120deg, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.88) 50%, rgba(0,0,0,0.84) 100%)",
+  // },
 };
 
 export function ContactSection({ currentCompany }: ContactSectionProps) {
@@ -102,7 +102,8 @@ export function ContactSection({ currentCompany }: ContactSectionProps) {
           className="text-center mb-10"
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Contact {currentCompanyData?.name || "Our"} Service Center
+            {/* Contact {currentCompanyData?.name || "Our"} Service Center */}
+            Contact Our Appliance Repair Center
           </h2>
           <p className="text-lg text-neutral-600 max-w-3xl mx-auto">
             Get in touch with our expert technicians for professional{" "}

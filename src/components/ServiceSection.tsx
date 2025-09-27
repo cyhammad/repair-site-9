@@ -21,10 +21,10 @@ type Theme = {
 };
 
 const THEMES: Record<string, Theme> = {
-  lg:      { accent: "#A50034", accentSoft: "rgba(165,0,52,0.10)", border: "rgba(165,0,52,0.25)" },
-  bosch:   { accent: "#F80000", accentSoft: "rgba(248,0,0,0.10)",  border: "rgba(248,0,0,0.25)" },
-  siemens: { accent: "#019997", accentSoft: "rgba(1,153,151,0.10)", border: "rgba(1,153,151,0.25)" },
-  samsung: { accent: "#000000", accentSoft: "rgba(0,0,0,0.06)",     border: "rgba(0,0,0,0.20)" },
+  // lg:      { accent: "#A50034", accentSoft: "rgba(165,0,52,0.10)", border: "rgba(165,0,52,0.25)" },
+  // bosch:   { accent: "#F80000", accentSoft: "rgba(248,0,0,0.10)",  border: "rgba(248,0,0,0.25)" },
+  // siemens: { accent: "#019997", accentSoft: "rgba(1,153,151,0.10)", border: "rgba(1,153,151,0.25)" },
+  // samsung: { accent: "#000000", accentSoft: "rgba(0,0,0,0.06)",     border: "rgba(0,0,0,0.20)" },
 };
 
 export function ServicesSection({ currentCompany }: ServicesSectionProps) {
@@ -76,12 +76,14 @@ export function ServicesSection({ currentCompany }: ServicesSectionProps) {
           className="text-center mb-16"
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            {currentCompanyData?.name || "Professional"} Repair Services
+            {/* {currentCompanyData?.name || "Professional"} Repair Services */}
+            Professional Repair Services
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
-            {currentCompanyData
+            {/* {currentCompanyData
               ? `Comprehensive ${currentCompanyData.name} appliance repair services in ${siteConfig.locations} with certified technicians and genuine parts.`
-              : `Expert repair services for all major home appliances in ${siteConfig.locations}. Professional technicians, genuine parts, and warranty included.`}
+              : `Expert repair services for all major home appliances in ${siteConfig.locations}. Professional technicians, genuine parts, and warranty included.`} */}
+              Expert repair services for all major home appliances in {siteConfig.locations}. Professional technicians, genuine parts.
           </p>
 
           {/* Quick Contact Buttons (brand-aligned like hero, adapted for light bg) */}

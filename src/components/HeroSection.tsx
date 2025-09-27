@@ -18,18 +18,17 @@ type Theme = {
 };
 
 const THEMES: Record<string, Theme> = {
-  lg: { accent: "#A50034", tint: "rgba(165,0,52,0.55)", tintDeep: "rgba(80,0,25,0.55)" },
-  bosch: { accent: "#F80000", tint: "rgba(248,0,0,0.50)", tintDeep: "rgba(128,0,0,0.50)" },
-  siemens: { accent: "#019997", tint: "rgba(1,153,151,0.50)", tintDeep: "rgba(0,70,69,0.50)" },
-  samsung: { accent: "#000000", tint: "rgba(0,0,0,0.45)", tintDeep: "rgba(0,0,0,0.55)" },
+  // lg: { accent: "#A50034", tint: "rgba(165,0,52,0.55)", tintDeep: "rgba(80,0,25,0.55)" },
+  // bosch: { accent: "#F80000", tint: "rgba(248,0,0,0.50)", tintDeep: "rgba(128,0,0,0.50)" },
+  // siemens: { accent: "#019997", tint: "rgba(1,153,151,0.50)", tintDeep: "rgba(0,70,69,0.50)" },
+  // samsung: { accent: "#000000", tint: "rgba(0,0,0,0.45)", tintDeep: "rgba(0,0,0,0.55)" },
 };
 
 export function HeroSection({ currentCompany }: HeroSectionProps) {
   const bgImage = "/kitchen.jpg";
-  const currentCompanyData = currentCompany
-    ? companies.find((c) => c.id === currentCompany)
-    : null;
-
+  // const currentCompanyData = currentCompany
+  //   ? companies.find((c) => c.id === currentCompany)
+  //   : null;
   const theme: Theme =
     (currentCompany && THEMES[currentCompany]) || {
       accent: "var(--primary)",
@@ -77,7 +76,7 @@ export function HeroSection({ currentCompany }: HeroSectionProps) {
               style={{ borderColor: `${theme.accent}33` }}
             >
               {/* Pill */}
-              {currentCompanyData ? (
+              {/* {currentCompanyData ? (
                 <div
                   className="inline-flex items-center rounded-full px-3 py-1 text-xs font-bold tracking-wide mb-4"
                   style={{
@@ -87,7 +86,7 @@ export function HeroSection({ currentCompany }: HeroSectionProps) {
                 >
                   AUTHORISED SERVICE CENTER – {currentCompanyData.name.toUpperCase()}
                 </div>
-              ) : (
+              ) : ( */}
                 <div
                   className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-medium mb-4"
                   style={{ backgroundColor: `${theme.accent}1a`, color: "#ffffff" }}
@@ -96,7 +95,7 @@ export function HeroSection({ currentCompany }: HeroSectionProps) {
                   <span className="opacity-60">•</span>
                   <span>Genuine Parts</span>
                 </div>
-              )}
+              {/* )} */}
 
               {/* Headline: keep same style as `/` (do NOT force uppercase) */}
               <motion.h1
@@ -105,9 +104,10 @@ export function HeroSection({ currentCompany }: HeroSectionProps) {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 }}
               >
-                {currentCompanyData
+                {/* {currentCompanyData
                   ? `${currentCompanyData.name} service center in Dubai and Abu Dhabi`
-                  : `Professional appliance repair in ${siteConfig.locations}`}
+                  : `Professional appliance repair in ${siteConfig.locations}`} */}
+                  Professional appliance repair in ${siteConfig.locations}
               </motion.h1>
 
               <motion.p
@@ -116,9 +116,10 @@ export function HeroSection({ currentCompany }: HeroSectionProps) {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
               >
-                {currentCompanyData
+                {/* {currentCompanyData
                   ? `Expert ${currentCompanyData.name} appliance repair services with certified technicians and genuine parts. Same day service available.`
-                  : `Expert repair services for all major appliance brands. Certified technicians available 24/7 throughout ${siteConfig.locations}.`}
+                  : `Expert repair services for all major appliance brands. Certified technicians available 24/7 throughout ${siteConfig.locations}.`} */}
+                  Expert repair services for all major appliance brands. Certified technicians available 24/7 throughout {siteConfig.locations}.
               </motion.p>
 
               <motion.div

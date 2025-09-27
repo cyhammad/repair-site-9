@@ -9,15 +9,16 @@ import { useParams } from "next/navigation";
 type Theme = { accent: string; accentFg: string; accentSoft: string; border: string };
 
 const THEMES: Record<string, Theme> = {
-  lg:      { accent: "#A50034", accentFg: "#ffffff", accentSoft: "rgba(165,0,52,0.08)", border: "rgba(165,0,52,0.25)" },
-  bosch:   { accent: "#F80000", accentFg: "#ffffff", accentSoft: "rgba(248,0,0,0.08)",  border: "rgba(248,0,0,0.25)" },
-  siemens: { accent: "#019997", accentFg: "#ffffff", accentSoft: "rgba(1,153,151,0.08)", border: "rgba(1,153,151,0.25)" },
-  samsung: { accent: "#000000", accentFg: "#ffffff", accentSoft: "rgba(0,0,0,0.06)",     border: "rgba(0,0,0,0.2)" },
+  // lg:      { accent: "#A50034", accentFg: "#ffffff", accentSoft: "rgba(165,0,52,0.08)", border: "rgba(165,0,52,0.25)" },
+  // // bosch:   { accent: "#F80000", accentFg: "#ffffff", accentSoft: "rgba(248,0,0,0.08)",  border: "rgba(248,0,0,0.25)" },
+  // siemens: { accent: "#019997", accentFg: "#ffffff", accentSoft: "rgba(1,153,151,0.08)", border: "rgba(1,153,151,0.25)" },
+  // samsung: { accent: "#000000", accentFg: "#ffffff", accentSoft: "rgba(0,0,0,0.06)",     border: "rgba(0,0,0,0.2)" },
 };
 
 export function Header() {
   const params = useParams() as { company?: string | string[] };
-  const currentCompany = Array.isArray(params?.company) ? params.company[0] : params?.company;
+  // const currentCompany = Array.isArray(params?.company) ? params.company[0] : params?.company;
+  const currentCompany = "";
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);

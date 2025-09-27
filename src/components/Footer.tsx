@@ -15,40 +15,40 @@ type Theme = {
 };
 
 const THEMES: Record<string, Theme> = {
-  lg: {
-    bg: "#3A0010",                  // deep LG maroon base
-    fg: "#FFFFFF",
-    accent: "#A50034",              // LG
-    soft: "rgba(165,0,52,0.12)",
-    border: "rgba(165,0,52,0.28)",
-  },
-  bosch: {
-    bg: "#7A0000",                  // deep Bosch red base
-    fg: "#FFFFFF",
-    accent: "#F80000",              // Bosch
-    soft: "rgba(248,0,0,0.12)",
-    border: "rgba(248,0,0,0.28)",
-  },
-  siemens: {
-    bg: "#003F3E",                  // deep Siemens teal base
-    fg: "#FFFFFF",
-    accent: "#019997",              // Siemens
-    soft: "rgba(1,153,151,0.12)",
-    border: "rgba(1,153,151,0.28)",
-  },
-  samsung: {
-    bg: "#000000",                  // Samsung black
-    fg: "#FFFFFF",
-    accent: "#000000",              // keep accent black on light elems; we’ll invert with border/soft
-    soft: "rgba(255,255,255,0.08)", // subtle neutral for chips
-    border: "rgba(255,255,255,0.18)",
-  },
+  // lg: {
+  //   bg: "#3A0010",                  // deep LG maroon base
+  //   fg: "#FFFFFF",
+  //   accent: "#A50034",              // LG
+  //   soft: "rgba(165,0,52,0.12)",
+  //   border: "rgba(165,0,52,0.28)",
+  // },
+  // bosch: {
+  //   bg: "#7A0000",                  // deep Bosch red base
+  //   fg: "#FFFFFF",
+  //   accent: "#F80000",              // Bosch
+  //   soft: "rgba(248,0,0,0.12)",
+  //   border: "rgba(248,0,0,0.28)",
+  // },
+  // siemens: {
+  //   bg: "#003F3E",                  // deep Siemens teal base
+  //   fg: "#FFFFFF",
+  //   accent: "#019997",              // Siemens
+  //   soft: "rgba(1,153,151,0.12)",
+  //   border: "rgba(1,153,151,0.28)",
+  // },
+  // samsung: {
+  //   bg: "#000000",                  // Samsung black
+  //   fg: "#FFFFFF",
+  //   accent: "#000000",              // keep accent black on light elems; we’ll invert with border/soft
+  //   soft: "rgba(255,255,255,0.08)", // subtle neutral for chips
+  //   border: "rgba(255,255,255,0.18)",
+  // },
 };
 
 export function Footer() {
   const params = useParams() as { company?: string | string[] };
-  const currentCompany = Array.isArray(params?.company) ? params.company[0] : params?.company;
-
+  // const currentCompany = Array.isArray(params?.company) ? params.company[0] : params?.company;
+  const currentCompany = "";
   const currentCompanyData = currentCompany
     ? companies.find((c) => c.id === currentCompany)
     : null;
